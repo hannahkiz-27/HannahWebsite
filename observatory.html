@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Observatory</title>
+    <style>
+      body {
+        font-family: times;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        background: #f8f6ed;
+        color: #111;
+        text-align: center;
+        padding-top: 2rem;
+      }
+      .page-spacer {
+        width: 100%;
+        height: 28rem;
+      }
+      h1 {
+        margin: 0;
+        font-size: 2.5rem;
+      }
+      .project-box {
+        position: absolute;
+        top: 7rem;
+        left: 5rem;
+        width: 900px;
+        min-height: 280px;
+        max-width: 46vw;
+        padding: 1rem 1.25rem;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        text-align: left;
+        z-index: 1;
+      }
+      .project-box p {
+        margin: 0;
+        line-height: 1.6;
+        color: #334155;
+        font-size: 1.5rem;
+      }
+      .project-image {
+        position: absolute;
+        top: 32rem;
+        left: 15rem;
+        width: 420px;
+        max-width: 36vw;
+        height: auto;
+        display: block;
+        z-index: 1;
+      }
+      .project-image-section {
+        position: absolute;
+        top: 32rem;
+        left: 65rem;
+        width: 420px;
+        max-width: 36vw;
+        height: auto;
+        display: block;
+        z-index: 1;
+      }
+      .pupa-image {
+        position: absolute;
+        top: -6rem;
+        right: -6rem;
+        width: 1000px;
+        max-width: 1000vw;
+        height: auto;
+        display: block;
+        z-index: 1;
+      }
+      .figure-label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #475569;
+        background: rgba(248, 246, 237, 0.9);
+        padding: 0.2rem 0.4rem;
+        z-index: 2;
+      }
+      .site-plan-image {
+        position: absolute;
+        top: 75rem;
+        left: 15rem;
+        width: 520px;
+        max-width: 42vw;
+        height: auto;
+        display: block;
+        z-index: 1;
+        transform: rotate(-90deg);
+      }
+      .site-plan-description {
+        position: absolute;
+        top: 85rem;
+        left: 60rem;
+        width: 600px;
+        padding: 0.85rem 1rem;
+        background: rgba(255,255,255,0.92);
+        border: 1px solid rgba(31,41,55,0.12);
+        border-radius: 0.75rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        color: #334155;
+        text-align: left;
+        line-height: 1.5;
+        font-size: 1.2rem;
+        z-index: 2;
+      }
+      .caterpilly-image {
+        position: absolute;
+        top: 85rem;
+        left: 36rem;
+        width: 1500px;
+        max-width: 2000vw;
+        height: auto;
+        display: block;
+        z-index: 1;
+        rotate: 10deg;
+      }
+      .caterpillar-image {
+        position: absolute;
+        top: 130rem;
+        left: 10rem;
+        width: 260px;
+        max-width: 24vw;
+        height: auto;
+        display: block;
+        z-index: 1;
+      }
+      .butterfly-image {
+        position: absolute;
+        top: 160rem;
+        left: 10rem;
+        width: 260px;
+        max-width: 24vw;
+        height: auto;
+        display: block;
+        z-index: 1;
+        margin-bottom: 10rem;
+      }
+      .chrysalis-image {
+        position: absolute;
+        top: 130rem;
+        left: 60rem;
+        width: 260px;
+        max-width: 24vw;
+        height: auto;
+        display: block;
+        z-index: 1;
+      }
+      .caterpillar-description {
+        position: absolute;
+        top: 130rem;
+        left: 28rem;
+        width: 300px;
+        padding: 0.85rem 1rem;
+        background: rgba(255,255,255,0.92);
+        border: 1px solid rgba(31,41,55,0.12);
+        border-radius: 0.75rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        color: #334155;
+        text-align: left;
+        line-height: 1.5;
+        font-size: 1rem;
+        z-index: 2;
+      }
+      .chrysalis-description {
+        position: absolute;
+        top: 130rem;
+        left: 78rem;
+        width: 360px;
+        padding: 0.85rem 1rem;
+        background: rgba(255,255,255,0.92);
+        border: 1px solid rgba(31,41,55,0.12);
+        border-radius: 0.75rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        color: #334155;
+        text-align: left;
+        line-height: 1.5;
+        font-size: 1rem;
+        z-index: 2;
+      }
+      .butterfly-description {
+        position: absolute;
+        top: 160rem;
+        left: 28rem;
+        width: 400px;
+        padding: 0.85rem 1rem;
+        background: rgba(255,255,255,0.92);
+        border: 1px solid rgba(31,41,55,0.12);
+        border-radius: 0.75rem;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+        color: #334155;
+        text-align: left;
+        line-height: 1.5;
+        font-size: 1rem;
+        z-index: 2;
+      }
+      .eggleaf-image {
+        position: absolute;
+        top: 130rem;
+        right: -45rem;
+        width: 1600px;
+        max-width: 2000vw;
+        height: auto;
+        display: block;
+        z-index: 1;
+        transform: scaleX(-1);
+        rotate: 20deg;
+      }
+      .monarch-image {
+        position: absolute;
+        top: 190rem;
+        left: 10%;
+        width: 400px;
+        max-width: 36vw;
+        height: auto;
+        display: block;
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+      .bottom-right-text {
+        position: absolute;
+        top: 195rem;
+        right: 5rem;
+        width: 320px;
+        max-width: 30vw;
+        padding: 0;
+        text-align: right;
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        z-index: 1;
+      }
+      .bottom-right-text h2 {
+        margin: 0 0 0.5rem;
+        font-size: 1rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #1f2937;
+      }
+      .bottom-right-text p {
+        margin: 0 0 0.75rem;
+        line-height: 1.6;
+        color: #334155;
+        font-size: 0.9rem;
+      }
+      .back-link {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #1a3f67;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        width: 2.5rem;
+        height: 2.5rem;
+        padding: 0;
+        border-radius: 999px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        font-size: 1.5rem;
+        z-index: 10;
+      }
+      body > img:not(.no-expand) {
+        cursor: zoom-in;
+      }
+      .image-viewer {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+        box-sizing: border-box;
+        background: rgba(15, 23, 42, 0.9);
+        cursor: zoom-out;
+        z-index: 100;
+      }
+      .image-viewer[hidden] {
+        display: none;
+      }
+      .image-viewer img {
+        max-width: 80vw;
+        max-height: 80vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        cursor: default;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Observatory</h1>
+    <div class="project-box">
+      <p>The observatory project was assigned to freshmen to design a lookout tower over the surrounding arboretum on campus. The shape of my design was inspired by the form and life cycle of an insect from larvae to adult. The draped, cocoon shape of the building is meant to pull a viewer's attention to the middle, and often overlooked stage of transformation between adult and caterpillar. The building encompasses four floors, each following a stage of development in this insect's life cycle.</p>
+    </div>
+    <div class="figure-label" style="top: 30rem; left: 15rem;">Axon</div>
+    <div class="figure-label" style="top: 30rem; left: 65rem;">Section</div>
+    <div class="figure-label" style="top: 82rem; left: 7rem;">Site Plan "Egg Floor"</div>
+    <div class="figure-label" style="top: 128rem; left: 10rem;">Caterpillar Floor</div>
+    <div class="figure-label" style="top: 158rem; left: 10rem;">Butterfly Floor</div>
+    <div class="figure-label" style="top: 128rem; left: 60rem;">Chrysalis Floor</div>
+    <img src="images/AxonObservatoy.png" alt="Observatory axon" class="project-image" />
+    <img src="images/ObservatorySection.png" alt="Observatory section" class="project-image-section" />
+    <img src="images/pupa.png" alt="Pupa" class="pupa-image no-expand" />
+    <img src="images/siteplancolor.png" alt="Site plan" class="site-plan-image" />
+    <div class="site-plan-description">The site of this project was the University of Illinois Arboretum, which is a 35 acre plot consisting of a university-owned "Japan House" as well as a botanical garden. The space is free to public use for all. Within this drawing of the site, located off of "Dr. Frank W. Kari Walkway", the first floor of my observatory can be seen. This is the egg stage of the cycle. Conceptually, the egg is a quiet stage. This floor holds sculptures hanging from the ceiling, which a visitor can observe as they rest, possibly lying down on the flexible seating in and around the floor. </div>
+    <img src="images/caterpilly.png" alt="Caterpillar study" class="caterpilly-image no-expand" />
+    <img src="images/caterpillar.png" alt="Caterpillar" class="caterpillar-image" />
+    <div class="caterpillar-description">Traversing up stairs or an elevator, visitors reach the caterpillar floor, which emphasizes curiosity and exploration. A mural depicting common Illinois flora and fauna adorn the floor, encouraging users to look down as they journey higher. This is the play floor, interactive activities revolving around nature and discovery are included in aiding people to engage with their surroundings.</div>
+    <img src="images/butterfly.png" alt="Butterfly" class="butterfly-image" />
+    <div class="butterfly-description">The final floor, the butterfly floor, is the highest of all. It is meant to be underwhelming. The floor is fit with binoculars of varying heights and a step/ramp allowing visitors to feel as though they are flying off of the tower (in a fun way) as they descend. This floor is underwhelming for the purpose of conceptually describing to visitors that they should be in no rush. The end shows as much beauty as the beginning had, the grandest part of reaching it was what you saw as you traveled up, because the end will only take you back down.</div>
+    <img src="images/chrysalis.png" alt="Chrysalis" class="chrysalis-image" />
+    <div class="chrysalis-description">The chrysalis floor is the stage of transformation, where visitors can reflect and observe the changes occurring within and around them. It emphasizes stillness and introspection, providing a space that pushes visitors toward presence. The half-covered, half-open, design makes it easier to exist unbothered by harsh natural forces as meditation commences. Being the stage I modeled the exterior appearance after, it is meant to be visually striking and emblematic of the overall concept.</div>
+    <img src="images/eggleaf.png" alt="Eggleaf" class="eggleaf-image no-expand" />
+    <img src="images/monarch.png" alt="Monarch butterfly" class="monarch-image no-expand" />
+    <div class="bottom-right-text">
+      <h2>Project Details</h2>
+      <p>Created by Hannah Kizilbash</p>
+      <p>Fall 2025</p>
+      <p>Drawn by hand + Adobe Photoshop</p>
+      
+    </div>
+    <div class="page-spacer"></div>
+    <a href="architecture.html" class="back-link">←</a>
+    <div class="image-viewer" hidden aria-label="Expanded image viewer">
+      <img src="" alt="" />
+    </div>
+    <script>
+      const imageViewer = document.querySelector('.image-viewer');
+      const expandedImage = imageViewer.querySelector('img');
+
+      document.querySelectorAll('body > img:not(.no-expand)').forEach((image) => {
+        image.addEventListener('click', () => {
+          expandedImage.src = image.src;
+          expandedImage.alt = image.alt;
+          imageViewer.hidden = false;
+        });
+      });
+
+      imageViewer.addEventListener('click', (event) => {
+        if (event.target === imageViewer) {
+          imageViewer.hidden = true;
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          imageViewer.hidden = true;
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,302 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Music</title>
+    <style>
+      body {
+        font-family: times;
+        margin: 0;
+        min-height: 100vh;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        background: #121111;
+        color: #f5f5f5;
+        text-align: left;
+      }
+      h1 {
+        margin: 0 0 0.5rem;
+        font-family: Times, 'Times New Roman', serif;
+        color: #cfcfcf;
+        margin-left: 0rem;
+      }
+      .top-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-left: 0;
+      }
+      a { color: #9ec5fe; text-decoration: none; font-weight: 600; margin: 0; }
+      .home-btn {
+        display: inline-block;
+        color: #9ec5fe;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.35rem 0.6rem;
+        border-radius: 999px;
+        margin-left: -1rem;
+      }
+      .home-btn:hover,
+      .home-btn:focus-visible {
+        background: rgba(158, 197, 254, 0.12);
+        outline: none;
+      }
+      .featured-image {
+        position: fixed;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(1200px, 100vw);
+        height: min(1200px, 100vh);
+        max-width: 200vw;
+        max-height: 200vh;
+        overflow: visible;
+        border-radius: 18px;
+        
+        z-index: 1;
+      }
+      .featured-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .tv-overlay {
+        position: absolute;
+        left: 20%;
+        top: 39%;
+        width: min(100%, 2700px);
+        pointer-events: none;
+        filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35));
+        z-index: 3;
+      }
+      .tv-overlay img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .tv-screen {
+        position: absolute;
+        left: 57%;
+        top: 62.3%;
+        width: 25.8%;
+        height: 20.5%;
+        z-index: 2;
+        overflow: hidden;
+        background: #000;
+        border-radius: 0.25rem;
+      }
+      .tv-screen video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        display: block;
+        background: #000;
+        object-fit: cover;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1;
+      }
+      .tv-screen.playing video {
+        opacity: 1;
+        visibility: visible;
+      }
+      .tv-screen.playing .tv-gif {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .tv-gif {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.2s ease, visibility 0.2s ease;
+      }
+      .featured-image .cd-image {
+        position: absolute;
+        left: 63%;
+        top: 110%;
+        width: 10rem;
+        height: auto;
+        object-fit: contain;
+        z-index: 4;
+        pointer-events: auto;
+      }
+      .center-image {
+        position: absolute;
+        left: 8.5rem;
+        top: 30%;
+        transform: translateY(-50%);
+        --card-size: min(280px, 30vmin);
+        width: var(--card-size);
+        height: var(--card-size);
+        overflow: hidden;
+        cursor: pointer;
+        z-index: 1;
+      }
+      .center-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+      }
+      .center-image a { display: block; line-height: 0; }
+      .center-image a:focus-visible { outline: 3px solid rgba(59,130,246,0.6); border-radius: 12px; outline-offset: 6px; }
+      .middle-image a { display: block; line-height: 0; }
+      .middle-image a:focus-visible { outline: 3px solid rgba(59,130,246,0.6); border-radius: 12px; outline-offset: 6px; }
+      .middle-image {
+        position: absolute;
+        left: calc(8.5rem - 1.5rem);
+        top: 70%;
+        transform: translateY(-50%);
+        --card-size: min(280px, 30vmin);
+        width: calc(var(--card-size) + 3rem);
+        height: calc(var(--card-size) + 3rem);
+        overflow: visible;
+        cursor: pointer;
+        padding: 1.5rem;
+        box-sizing: border-box;
+        z-index: 4;
+      }
+      .middle-image img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.5);
+        pointer-events: none;
+      }
+      .pick-box {
+        position: fixed;
+        left: 64%;
+        top: 14vh;
+        transform: translateX(-50%);
+      
+       
+        border-radius: 12px;
+        padding: 1rem 1.6rem;
+       
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        z-index: 5;
+      }
+      .pick-box p {
+        margin: 0;
+        color: #f5f5f5;
+        font-size: 1.4rem;
+        letter-spacing: 0.02em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-links">
+      <h1>Music</h1>
+      <a href="index.html" class="home-btn" aria-label="Back to Home" title="Back to Home">← Back to Home</a>
+    </div>
+
+    <div class="pick-box">
+      <p>Which channel shall you watch?</p>
+    </div>
+
+    <div class="featured-image">
+      <div class="tv-overlay">
+        <img src="images/television.png" alt="Television" />
+      </div>
+      <div class="tv-screen">
+        <img class="tv-gif" src="images/download.gif" alt="Animated TV display" />
+        <video controls playsinline></video>
+      </div>
+      <a href="https://www.youtube.com/@Noonie.K" target="_blank" rel="noopener noreferrer" aria-label="Visit Noonie on YouTube">
+        <img class="cd-image" src="images/youtube.png" alt="YouTube" />
+      </a>
+    </div>
+
+    <div class="center-image" id="open-circus" role="button" tabindex="0" aria-label="Play the circus video">
+      <img src="images/cs.jpg" alt="Featured music image">
+    </div>
+    <div class="middle-image" id="open-fantasy" role="button" tabindex="0" aria-label="Play the hypnotic fantasy music video">
+      <img src="images/Screenshot 2026-07-02 204657.png" alt="New centered image">
+    </div>
+
+    <script>
+      const circusTrigger = document.getElementById('open-circus');
+      const fantasyTrigger = document.getElementById('open-fantasy');
+      const tvScreen = document.querySelector('.tv-screen');
+      const circusVideo = tvScreen.querySelector('video');
+      let userSelectedVideo = false;
+
+      function setVideoSource(sourcePath) {
+        const newSource = document.createElement('source');
+        newSource.src = sourcePath;
+        newSource.type = 'video/mp4';
+
+        userSelectedVideo = true;
+        tvScreen.classList.remove('playing');
+        circusVideo.pause();
+        circusVideo.currentTime = 0;
+
+        while (circusVideo.firstChild) {
+          circusVideo.removeChild(circusVideo.firstChild);
+        }
+
+        circusVideo.appendChild(newSource);
+        circusVideo.load();
+      }
+
+      function restoreGif() {
+        userSelectedVideo = false;
+        tvScreen.classList.remove('playing');
+        circusVideo.pause();
+        circusVideo.currentTime = 0;
+      }
+
+      circusVideo.addEventListener('canplay', function () {
+        if (!userSelectedVideo) return;
+        tvScreen.classList.add('playing');
+        circusVideo.play();
+      });
+
+      function playCircusVideo() {
+        setVideoSource('images/A song to run away to the circus.mp4');
+      }
+
+      function playFantasyVideo() {
+        setVideoSource('images/Hypnotic Fantasy - Music Video.mp4');
+      }
+
+      circusTrigger.addEventListener('click', playCircusVideo);
+      circusTrigger.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          playCircusVideo();
+        }
+      });
+
+      fantasyTrigger.addEventListener('click', playFantasyVideo);
+      fantasyTrigger.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          playFantasyVideo();
+        }
+      });
+
+      circusVideo.addEventListener('ended', restoreGif);
+    </script>
+  </body>
+</html>

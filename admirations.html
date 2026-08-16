@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hannah Kizilbash - About</title>
+    <style>
+      :root {
+        --paper: #f8f6ed;
+        --page: #f3f1ea;
+        --ink: #202122;
+        --muted: #54595d;
+        --line: #d8d7d0;
+        --nav: #f0f0ee;
+        --panel: #f9f9f7;
+        --link: #0645ad;
+        --link-hover: #0b0080;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: sans-serif;
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .wiki-page {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 3rem;
+      }
+
+      .wiki-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 0.8rem;
+        margin-bottom: 1.25rem;
+        font-size: 0.95rem;
+      }
+
+      .wiki-topbar a {
+        color: var(--link);
+        text-decoration: none;
+      }
+
+      .wiki-topbar a:hover { color: var(--link-hover); }
+
+      .wiki-layout {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.18);
+      }
+
+      .sidebar {
+        background: var(--nav);
+        border-right: 1px solid var(--line);
+        padding: 1rem 0.9rem;
+      }
+
+      .sidebar h3 {
+        margin: 0 0 0.7rem;
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .sidebar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .sidebar li {
+        margin: 0.35rem 0;
+      }
+
+      .sidebar a {
+        color: var(--link);
+        text-decoration: none;
+        font-size: 0.96rem;
+      }
+
+      .sidebar a:hover { color: var(--link-hover); }
+
+      .content {
+        background: var(--page);
+        padding: 1.5rem 2rem 2.2rem;
+      }
+
+      .content-header {
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.45rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.1rem, 3vw, 2.9rem);
+        font-weight: 400;
+        line-height: 1.15;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        font-size: 0.92rem;
+        margin-top: 0.15rem;
+      }
+
+      .lead {
+        font-size: 1.05rem;
+        line-height: 1.8;
+        color: #2e2e2e;
+        margin: 1.2rem 0;
+      }
+
+      .infobox {
+        float: right;
+        width: 240px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        margin: 0 0 1rem 1.2rem;
+      }
+
+      .infobox .header {
+        text-align: center;
+        font-weight: 700;
+        padding: 0.8rem 0.6rem 0.4rem;
+        border-bottom: 1px solid var(--line);
+        background: #eceae5;
+      }
+
+      .infobox .body {
+        padding: 0.8rem 0.8rem 0.9rem;
+        font-size: 0.92rem;
+        line-height: 1.7;
+      }
+
+      .infobox strong {
+        font-weight: 700;
+      }
+
+      h2 {
+        margin-top: 1.8rem;
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid var(--line);
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        font-size: 1.8rem;
+      }
+
+      p, li {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #2f2f2f;
+      }
+
+      a.wiki-link {
+        color: var(--link);
+        text-decoration: underline;
+        text-underline-offset: 0.14em;
+      }
+
+      a.wiki-link:hover {
+        color: var(--link-hover);
+      }
+
+      ul {
+        padding-left: 1.25rem;
+      }
+
+      .news-item {
+        margin-bottom: 0.9rem;
+        padding-bottom: 0.7rem;
+        border-bottom: 1px dashed var(--line);
+      }
+
+      .news-item:last-child { border-bottom: none; }
+
+      .news-item .date {
+        color: var(--muted);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .interest-gallery {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(120px, 1fr));
+        gap: 0.8rem;
+        margin-top: 1rem;
+      }
+
+      .interest-card {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .interest-card img {
+        display: block;
+        width: 100%;
+        height: 110px;
+        object-fit: cover;
+        border: 1px solid rgba(0,0,0,0.08);
+      }
+
+      .interest-card span {
+        font-size: 0.8rem;
+        color: var(--muted);
+        text-align: center;
+        letter-spacing: 0.03em;
+      }
+
+      @media (max-width: 760px) {
+        .wiki-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .infobox {
+          float: none;
+          width: 100%;
+          margin: 0 0 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wiki-page">
+      <div class="wiki-topbar">
+        <a href="index.html">← Home</a>
+        <span>Personal profile</span>
+      </div>
+
+      <div class="wiki-layout">
+        <aside class="sidebar">
+          <h3>Navigation</h3>
+          <ul>
+            <li><a href="#information">Information</a></li>
+            <li><a href="#interests">Interests</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </aside>
+
+        <main class="content">
+          <div class="content-header">
+            <h1>Hannah Kizilbash</h1>
+            <div class="subtitle">Architecture Student at University of Illinois</div>
+          </div>
+
+          <p class="lead">
+            Hannah Kizilbash is a 19 year old woman who feeds her passions daily. She likes getting really engrossed in a project and continuing it to completion. She spends her time thinking about how to show the world her soul in a way that is not spoken, but shown through art. 
+          </p>
+
+          <aside class="infobox">
+            <div class="header">Information</div>
+            <div class="body">
+              <div><strong>Occupation:</strong> Student</div>
+              <div><strong>Interests:</strong> architecture, music, art</div>
+              <div><strong>Focus:</strong> beauty, meaning, and design</div>
+              <div><strong>Location:</strong> Champaign, Illinois (U.S.A)</div>
+            </div>
+          </aside>
+
+          <section id="information">
+            <h2>Recent thoughts</h2>
+            <p>
+              I have started to understand yoga. I used to see it as a competition with myself, where i would feel the need to be the stretchiest in the class, always doing the hardest pose but now I see it differently. I have seen it as an opportunity to try and let go of my insecurities, they often say, "Yoga class really starts the minute you leave the studio". So, I am pleased to say that I have finally started yoga!
+            </p>
+            <p>
+              ------ 
+            </p>
+          </section>
+
+          <section id="interests">
+            <h2>Recent Favorites</h2>
+            <ul>
+              <li><a class="wiki-link" href="https://en.wikipedia.org/wiki/Radiohead" target="_blank" rel="noreferrer">Radiohead</a></li>
+              <li><a class="wiki-link" href="https://en.wikipedia.org/wiki/Portishead_(band)" target="_blank" rel="noreferrer">Portishead</a></li>
+              <li><a class="wiki-link" href="https://en.wikipedia.org/wiki/Undertale" target="_blank" rel="noreferrer">Undertale</a></li>
+              <li><a class="wiki-link" href="https://en.wikipedia.org/wiki/Yoga" target="_blank" rel="noreferrer">Yoga</a></li>
+              <li><a class="wiki-link" href="https://en.wikipedia.org/wiki/Bj%C3%B6rk" target="_blank" rel="noreferrer">Björk</a></li>
+            </ul>
+
+            <div class="interest-gallery">
+              <div class="interest-card">
+                <img src="images/Radiohead.jpg" alt="Radiohead" />
+                <span>Radiohead</span>
+              </div>
+              <div class="interest-card">
+                <img src="images/Dummy - Portishead.jpg" alt="Portishead" />
+                <span>Portishead</span>
+              </div>
+              <div class="interest-card">
+                <img src="images/undertale.jpg" alt="Undertale" />
+                <span>Undertale</span>
+              </div>
+              <div class="interest-card">
+                <img src="images/yoga.jpg" alt="Yoga" />
+                <span>Yoga</span>
+              </div>
+              <div class="interest-card">
+                <img src="images/Björk photographed by Takashi Homma, 1996_.jpg" alt="Björk" />
+                <span>Björk</span>
+              </div>
+            </div>
+          </section>
+
+          <section id="news">
+            <h2>News</h2>
+            <div class="news-item">
+              <div class="date">Recently</div>
+              <div>Got back from Portugal and felt emotionally expanded.</div>
+            </div>
+            <div class="news-item">
+              <div class="date">Current focus</div>
+              <div>Programming this website :P.</div>
+            </div>
+            <div class="news-item">
+              <div class="date">Next</div>
+              <div>Starting my sophomore year at the University of Illinois! Moving in Thursday the 20th</div>
+            </div>
+            
+          </section>
+
+          <section id="contact">
+            <h2>Contact</h2>
+            <p>
+              Email: Hannahkizilbash@gmail.com</p>
+              Phone Number: 773-786-7800
+
+            </p>
+            <p>Linkedin: Hannah Kizilbash </p>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

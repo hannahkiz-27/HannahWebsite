@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Architecture</title>
+    <style>
+      body { font-family: times; margin: 0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;background: #f8f6ed; color: #5f5a51; text-align: center; }
+      a { color: #2b6cb0; text-decoration: none; font-weight: 400; margin-top: 1.25rem; }
+      .image-row { display: flex; gap: 0.5rem; align-items: center; justify-content: center; }
+      .image-button { display: inline-flex; width: 40%; aspect-ratio: 1 / 1; overflow: visible; padding: 0; position: relative; left: 15rem; }
+      .image-button img { width: 100%; height: 100%; object-fit: contain; object-position: left center; transition: transform 0.2s ease; margin: 0; }
+      .image-button:hover img { transform: rotate(2deg); }
+      .observatory-img-link { display: inline-flex; padding: 0; }
+      .observatory-img { max-width: 30%; height: auto; display: block; transform: translate(15rem, -2.3rem); transition: transform 0.2s ease; }
+      .observatory-img-link:hover .observatory-img { transform: translate(15rem, -1.5rem) rotate(2deg); }
+    </style>
+  </head>
+  <body>
+    <h1>Architecture</h1>
+    <div class="image-row">
+      <a href="aria-math.html" class="image-button"><img src="images/ariamath2.png" alt="Aria math" /></a>
+      <a href="observatory.html" class="observatory-img-link"><img src="images/observatory.png" alt="Observatory" class="observatory-img" /></a>
+    </div>
+    <a href="index.html">← Back to Home</a>
+  </body>
+</html>

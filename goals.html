@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Goals</title>
+    <style>
+      body {
+        font-family: times;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 1.5rem;
+        background-image: url('images/starry sky.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #f7f7f7;
+        text-align: left;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      }
+      h1 {
+        margin: 0 0 0.5rem 0;
+      }
+      a {
+        color: #dfeeff;
+        text-decoration: none;
+        font-weight: 600;
+        margin-top: 0;
+        margin-bottom: auto;
+      }
+      .catch-message {
+        position: fixed;
+        bottom: 2rem;
+        left: 2rem;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #d8c9f0;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        letter-spacing: 0.5px;
+        z-index: 5;
+      }
+      @keyframes shootingStarTrail {
+        from {
+          top: var(--start-y);
+          left: var(--start-x);
+          opacity: 1;
+        }
+        to {
+          top: var(--end-y);
+          left: var(--end-x);
+          opacity: 1;
+        }
+      }
+      .shooting-star {
+        position: fixed;
+        animation: shootingStarTrail 6s ease-in forwards;
+        pointer-events: auto;
+        z-index: 10;
+        cursor: pointer;
+      }
+      .goal-message {
+        position: fixed;
+        background: rgba(67, 66, 120, 0.5);
+        color: #fffef8;
+        padding: 1.5rem;
+        border-radius: 12px;
+        font-size: 1.3rem;
+        line-height: 1.5;
+        text-align: center;
+        max-width: 300px;
+        z-index: 15;
+        animation: messageAppear 0.5s ease forwards;
+        backdrop-filter: blur(4px);
+        box-shadow: 0 8px 24px rgba(237, 234, 251, 0.4);
+      }
+      @keyframes messageAppear {
+        from {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Goals</h1>
+    <a href="philosophy.html">← Back to Philosophy</a>
+    <div class="catch-message">I made wishes, can you catch them?</div>
+
+    <script>
+      const goalMessages = [
+        "Live in far off lands",
+        "Make music that speaks to others",
+        "Design for communities",
+        "Find peace on a spiritual yoga retreat",
+        "Allow myself to feel at ease even if times are hard"
+        
+      ];
+
+      let availableMessages = [...goalMessages];
+
+      function getNextMessage() {
+        if (availableMessages.length === 0) {
+          availableMessages = [...goalMessages];
+        }
+        const randomIndex = Math.floor(Math.random() * availableMessages.length);
+        const message = availableMessages[randomIndex];
+        availableMessages.splice(randomIndex, 1);
+        return message;
+      }
+
+      function createFallingStar() {
+        const star = document.createElement('img');
+        star.src = 'images/shooting star.png';
+        star.alt = 'Shooting star';
+        star.className = 'shooting-star';
+
+        // Randomly choose between two falling patterns
+        const pattern = Math.random() > 0.5 ? 'topRight' : 'topMiddle';
+
+        let startX, startY, endX, endY;
+
+        if (pattern === 'topRight') {
+          // Start around the top right with some variation
+          startX = 100 + (Math.random() * 20 - 10); // 90% to 110% (right side)
+          startY = -50 - Math.random() * 50; // -50% to -100% (start from various heights)
+          
+          // End around the bottom left
+          endX = -10 + (Math.random() * 20 - 10); // -20% to 0% (left side)
+          endY = 120; // 120% (bottom of screen)
+        } else {
+          // Start around the top middle
+          startX = 50 + (Math.random() * 20 - 10); // 40% to 60% (middle)
+          startY = -50 - Math.random() * 50; // -50% to -100% (start from various heights)
+          
+          // End around halfway up the left side
+          endX = -10 + (Math.random() * 20 - 10); // -20% to 0% (left side)
+          endY = 50; // 50% (halfway up)
+        }
+
+        // Set CSS variables for this star
+        star.style.setProperty('--start-x', startX + '%');
+        star.style.setProperty('--start-y', startY + '%');
+        star.style.setProperty('--end-x', endX + '%');
+        star.style.setProperty('--end-y', endY + '%');
+
+        // Add click handler to the star
+        star.addEventListener('click', (e) => {
+          e.stopPropagation();
+          
+          // Get the star's current position
+          const rect = star.getBoundingClientRect();
+          const starX = rect.left + rect.width / 2;
+          const starY = rect.top + rect.height / 2;
+
+          // Remove the star
+          star.remove();
+          clearTimeout(starTimeout);
+
+          // Select the next message from the rotation
+          const randomMessage = getNextMessage();
+
+          // Create and display the message
+          const message = document.createElement('div');
+          message.className = 'goal-message';
+          message.textContent = randomMessage;
+          message.style.left = (starX - 150) + 'px'; // Center it horizontally
+          message.style.top = (starY - 50) + 'px'; // Position it near the star
+
+          document.body.appendChild(message);
+
+          // Remove the message after 4 seconds
+          setTimeout(() => message.remove(), 4000);
+        });
+
+        document.body.appendChild(star);
+
+        // Remove the element after animation completes
+        const starTimeout = setTimeout(() => star.remove(), 6000);
+      }
+
+      // Spawn falling stars at random intervals
+      function spawnRandomStar() {
+        createFallingStar();
+        const randomDelay = Math.random() * 1500 + 3500; // 3.5-5 seconds between spawns
+        setTimeout(spawnRandomStar, randomDelay);
+      }
+
+      spawnRandomStar();
+    </script>
+  </body>
+</html>

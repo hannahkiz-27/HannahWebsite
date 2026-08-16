@@ -1,0 +1,107 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Philosophy</title>
+    <style>
+      body {
+        font-family: times;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 2rem;
+        background-image: url('images/fantasyland.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: #111;
+        text-align: left;
+      }
+
+      .castle-image {
+        position: fixed;
+        right: -7rem;
+        top: 55%;
+        transform: translateY(-50%);
+        width: min(900vw, 1500px);
+        height: auto;
+        filter: brightness(1.25) saturate(1.1);
+      }
+
+      .title-card {
+        background: rgba(245, 232, 208, 0.8);
+        border: 2px solid rgba(120, 91, 60, 0.75);
+        border-radius: 1.5rem;
+        box-shadow: 0 20px 40px rgba(74, 48, 26, 0.16);
+        backdrop-filter: blur(4px);
+        padding: 1.2rem 1.5rem 1rem;
+        max-width: 520px;
+        z-index: 2;
+        position: relative;
+        margin-top: 5rem;
+        margin-left: 6rem;
+      }
+
+      h1 {
+        margin: 0 0 0.8rem;
+        font-size: clamp(2.1rem, 4vw, 4rem);
+        line-height: 1;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #553d2b;
+        text-shadow: 0 2px 0 rgba(255,255,255,0.7);
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        align-items: center;
+      }
+
+      nav a {
+        display: inline-block;
+        padding: 0.55rem 0.9rem;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #ecb06b, #f1cea5);
+        border: 1px solid rgba(159, 119, 72, 0.5);
+        color: #684a27;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        box-shadow: 0 8px 18px rgba(215, 179, 132, 0.15);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      nav a:hover,
+      nav a:focus {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 22px rgba(215, 179, 132, 0.15);
+      }
+
+      .home-link {
+        display: inline-block;
+        margin-top: 0.9rem;
+        color: #684a27;
+        text-decoration: none;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="title-card">
+      <h1>A glimpse into my mind</h1>
+      <nav>
+        <a href="goals.html">Goals</a>
+        <a href="peace.html">Peace</a>
+         <a href="admirations.html">Hannahpedia</a>
+      </nav>
+      <a class="home-link" href="index.html">← Back to Home</a>
+    </header>
+    <img class="castle-image" src="images/castle.png" alt="Castle" />
+  </body>
+</html>

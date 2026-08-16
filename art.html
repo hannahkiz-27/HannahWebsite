@@ -1,0 +1,148 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Art</title>
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        width: 100%;
+      }
+
+      body {
+        font-family: times;
+        background: #000;
+        overflow: hidden;
+      }
+
+      .slideshow {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        animation: fade 24s ease-in-out infinite;
+      }
+
+      .slide1 {
+        background-image: url("images/beach1.jpg");
+        animation-delay: 0s;
+      }
+
+      .slide2 {
+        background-image: url("images/IMG_1663.jpg");
+        animation-delay: 8s;
+      }
+
+      .slide3 {
+        background-image: url("images/beach1.jpg");
+        animation-delay: 16s;
+      }
+
+      @keyframes fade {
+        0% {
+          opacity: 0;
+        }
+        8% {
+          opacity: 1;
+        }
+        26% {
+          opacity: 1;
+        }
+        34% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .hero {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 1rem;
+        padding: 2rem;
+        text-align: left;
+        color: #f7f7f7;
+        text-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(2.5rem, 6vw, 5rem);
+      }
+
+      .home-btn {
+        display: inline-block;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 999px;
+        padding: 0.9rem 1.6rem;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .hero a,
+      .hero .home-btn {
+        transition: transform 0.2s ease;
+      }
+
+      .hero .home-btn:hover,
+      .hero .home-btn:focus-visible {
+        transform: translateY(-1px);
+      }
+
+      .hero a:not(.home-btn) {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 999px;
+        padding: 0.9rem 1.6rem;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .hero a:hover,
+      .hero a:focus-visible {
+        background: rgba(255, 255, 255, 0.16);
+        transform: translateY(-1px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slideshow">
+      <div class="slide slide1"></div>
+      <div class="slide slide2"></div>
+      <div class="slide slide3"></div>
+    </div>
+
+    <main class="hero">
+      <h1>Art</h1>
+      <a href="index.html" class="home-btn" aria-label="Back to Home" title="Back to Home">← Back to Home</a>
+    </main>
+  </body>
+</html>
