@@ -242,21 +242,13 @@
       let userSelectedVideo = false;
 
       function setVideoSource(sourcePath) {
-        const newSource = document.createElement('source');
-        newSource.src = sourcePath;
-        newSource.type = 'video/mp4';
-
         userSelectedVideo = true;
-        tvScreen.classList.remove('playing');
         circusVideo.pause();
         circusVideo.currentTime = 0;
-
-        while (circusVideo.firstChild) {
-          circusVideo.removeChild(circusVideo.firstChild);
-        }
-
-        circusVideo.appendChild(newSource);
+        circusVideo.src = sourcePath;
         circusVideo.load();
+        tvScreen.classList.add('playing');
+        circusVideo.play();
       }
 
       function restoreGif() {
@@ -265,12 +257,6 @@
         circusVideo.pause();
         circusVideo.currentTime = 0;
       }
-
-      circusVideo.addEventListener('canplay', function () {
-        if (!userSelectedVideo) return;
-        tvScreen.classList.add('playing');
-        circusVideo.play();
-      });
 
       function playCircusVideo() {
         setVideoSource('images/A song to run away to the circus.mp4');
