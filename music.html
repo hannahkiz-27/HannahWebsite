@@ -1,288 +1,235 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Music</title>
-    <style>
-      body {
-        font-family: times;
-        margin: 0;
-        min-height: 100vh;
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
-        background: #121111;
-        color: #f5f5f5;
-        text-align: left;
-      }
-      h1 {
-        margin: 0 0 0.5rem;
-        font-family: Times, 'Times New Roman', serif;
-        color: #cfcfcf;
-        margin-left: 0rem;
-      }
-      .top-links {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        margin-left: 0;
-      }
-      a { color: #9ec5fe; text-decoration: none; font-weight: 600; margin: 0; }
-      .home-btn {
-        display: inline-block;
-        color: #9ec5fe;
-        text-decoration: none;
-        font-weight: 600;
-        padding: 0.35rem 0.6rem;
-        border-radius: 999px;
-        margin-left: -1rem;
-      }
-      .home-btn:hover,
-      .home-btn:focus-visible {
-        background: rgba(158, 197, 254, 0.12);
-        outline: none;
-      }
-      .featured-image {
-        position: fixed;
-        top: 30%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: min(1200px, 100vw);
-        height: min(1200px, 100vh);
-        max-width: 200vw;
-        max-height: 200vh;
-        overflow: visible;
-        border-radius: 18px;
-        
-        z-index: 1;
-      }
-      .featured-image img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .tv-overlay {
-        position: absolute;
-        left: 20%;
-        top: 39%;
-        width: min(100%, 2700px);
-        pointer-events: none;
-        filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.35));
-        z-index: 3;
-      }
-      .tv-overlay img {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-      .tv-screen {
-        position: absolute;
-        left: 57%;
-        top: 62.3%;
-        width: 25.8%;
-        height: 20.5%;
-        z-index: 2;
-        overflow: hidden;
-        background: #000;
-        border-radius: 0.25rem;
-      }
-      .tv-screen video {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-        display: block;
-        background: #000;
-        object-fit: cover;
-        opacity: 0;
-        visibility: hidden;
-        z-index: 1;
-      }
-      .tv-screen.playing video {
-        opacity: 1;
-        visibility: visible;
-      }
-      .tv-screen.playing .tv-gif {
-        opacity: 0;
-        visibility: hidden;
-      }
-      .tv-gif {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        pointer-events: none;
-        z-index: 0;
-        opacity: 1;
-        visibility: visible;
-        transition: opacity 0.2s ease, visibility 0.2s ease;
-      }
-      .featured-image .cd-image {
-        position: absolute;
-        left: 63%;
-        top: 110%;
-        width: 10rem;
-        height: auto;
-        object-fit: contain;
-        z-index: 4;
-        pointer-events: auto;
-      }
-      .center-image {
-        position: absolute;
-        left: 8.5rem;
-        top: 30%;
-        transform: translateY(-50%);
-        --card-size: min(280px, 30vmin);
-        width: var(--card-size);
-        height: var(--card-size);
-        overflow: hidden;
-        cursor: pointer;
-        z-index: 1;
-      }
-      .center-image img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 12px;
-        box-shadow: 0 12px 36px rgba(0,0,0,0.5);
-      }
-      .center-image a { display: block; line-height: 0; }
-      .center-image a:focus-visible { outline: 3px solid rgba(59,130,246,0.6); border-radius: 12px; outline-offset: 6px; }
-      .middle-image a { display: block; line-height: 0; }
-      .middle-image a:focus-visible { outline: 3px solid rgba(59,130,246,0.6); border-radius: 12px; outline-offset: 6px; }
-      .middle-image {
-        position: absolute;
-        left: calc(8.5rem - 1.5rem);
-        top: 70%;
-        transform: translateY(-50%);
-        --card-size: min(280px, 30vmin);
-        width: calc(var(--card-size) + 3rem);
-        height: calc(var(--card-size) + 3rem);
-        overflow: visible;
-        cursor: pointer;
-        padding: 1.5rem;
-        box-sizing: border-box;
-        z-index: 4;
-      }
-      .middle-image img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 12px;
-        box-shadow: 0 12px 36px rgba(0,0,0,0.5);
-        pointer-events: none;
-      }
-      .pick-box {
-        position: fixed;
-        left: 64%;
-        top: 14vh;
-        transform: translateX(-50%);
-      
-       
-        border-radius: 12px;
-        padding: 1rem 1.6rem;
-       
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        z-index: 5;
-      }
-      .pick-box p {
-        margin: 0;
-        color: #f5f5f5;
-        font-size: 1.4rem;
-        letter-spacing: 0.02em;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="top-links">
-      <h1>Music</h1>
-      <a href="index.html" class="home-btn" aria-label="Back to Home" title="Back to Home">← Back to Home</a>
-    </div>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Music — Personal Website</title>
+		<style>
+			:root {
+				--paper: #090b12;
+				--ink: #f3efe8;
+				--muted: #dce5f4;
+				--panel: #141b2b;
+				--line: rgba(170, 190, 255, 0.45);
+			}
 
-    <div class="pick-box">
-      <p>Which channel shall you watch?</p>
-    </div>
+			* {
+				box-sizing: border-box;
+			}
 
-    <div class="featured-image">
-      <div class="tv-overlay">
-        <img src="images/television.png" alt="Television" />
-      </div>
-      <div class="tv-screen">
-        <img class="tv-gif" src="images/download.gif" alt="Animated TV display" />
-        <video controls playsinline></video>
-      </div>
-      <a href="https://www.youtube.com/@Noonie.K" target="_blank" rel="noopener noreferrer" aria-label="Visit Noonie on YouTube">
-        <img class="cd-image" src="images/youtube.png" alt="YouTube" />
-      </a>
-    </div>
+			body {
+				font-family: times, serif;
+				margin: 0;
+				min-height: 100vh;
+				background: var(--paper);
+				color: var(--ink);
+			}
 
-    <div class="center-image" id="open-circus" role="button" tabindex="0" aria-label="Play the circus video">
-      <img src="images/cs.jpg" alt="Featured music image">
-    </div>
-    <div class="middle-image" id="open-fantasy" role="button" tabindex="0" aria-label="Play the hypnotic fantasy music video">
-      <img src="images/Screenshot 2026-07-02 204657.png" alt="New centered image">
-    </div>
+			main {
+				max-width: 900px;
+				margin: 0 auto;
+				padding: 4rem 1rem 5rem;
+				text-align: center;
+			}
 
-    <script>
-      const circusTrigger = document.getElementById('open-circus');
-      const fantasyTrigger = document.getElementById('open-fantasy');
-      const tvScreen = document.querySelector('.tv-screen');
-      const circusVideo = tvScreen.querySelector('video');
-      let userSelectedVideo = false;
+			.home-link {
+				position: fixed;
+				top: 1.25rem;
+				left: 1.25rem;
+				z-index: 10;
+			}
 
-      function setVideoSource(sourcePath) {
-        userSelectedVideo = true;
-        circusVideo.pause();
-        circusVideo.currentTime = 0;
-        circusVideo.src = sourcePath;
-        circusVideo.load();
-        tvScreen.classList.add('playing');
-        circusVideo.play();
-      }
+			h1 {
+				margin: 0 0 1rem;
+				color: #edf4ff;
+				font-size: clamp(2.5rem, 5vw, 4rem);
+				font-weight: 400;
+			}
 
-      function restoreGif() {
-        userSelectedVideo = false;
-        tvScreen.classList.remove('playing');
-        circusVideo.pause();
-        circusVideo.currentTime = 0;
-      }
+			h2 {
+				margin: 1.5rem 0 1rem;
+				color: #dfe9ff;
+				font-size: clamp(1.5rem, 3vw, 2.25rem);
+				font-weight: 400;
+			}
 
-      function playCircusVideo() {
-        setVideoSource('images/A song to run away to the circus.mp4');
-      }
+			.video-wrap {
+				position: relative;
+				max-width: 760px;
+				margin: 1.5rem auto 10rem;
+				padding: 0.5rem;
+				background: rgba(14, 18, 28, 0.8);
+				border: 1px solid var(--line);
+				border-radius: 12px;
+				overflow: hidden;
+			}
 
-      function playFantasyVideo() {
-        setVideoSource('images/Hypnotic Fantasy - Music Video.mp4');
-      }
+			.video-overlay {
+				position: absolute;
+				inset: 0.5rem;
+				background: url('images/question marks.gif') center center / cover no-repeat;
+				border-radius: 8px;
+				z-index: 2;
+				opacity: 1;
+				transition: opacity 0.25s ease;
+				pointer-events: none;
+			}
 
-      circusTrigger.addEventListener('click', playCircusVideo);
-      circusTrigger.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          playCircusVideo();
-        }
-      });
+			.video-wrap.is-playing .video-overlay {
+				opacity: 0;
+			}
 
-      fantasyTrigger.addEventListener('click', playFantasyVideo);
-      fantasyTrigger.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault();
-          playFantasyVideo();
-        }
-      });
+			.button-row {
+				display: flex;
+				justify-content: center;
+				gap: 1rem;
+				flex-wrap: wrap;
+				margin-top: 2rem;
+			}
 
-      circusVideo.addEventListener('ended', restoreGif);
-    </script>
-  </body>
+			.play-button {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 110px;
+				height: 110px;
+				margin: 0;
+				padding: 0;
+				background: #101827;
+				border: 1px solid var(--line);
+				border-radius: 10px;
+				color: var(--muted);
+				font-family: times, serif;
+				font-size: 1.1rem;
+				cursor: pointer;
+				overflow: hidden;
+				transition: transform 0.2s ease, background 0.2s ease;
+			}
+
+			.play-button img {
+				display: block;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+			}
+
+			.play-button:hover {
+				background: #f1e8d5;
+				transform: translateY(-1px);
+			}
+
+			.play-button:focus-visible {
+				outline: 2px solid var(--muted);
+				outline-offset: 3px;
+			}
+
+			.tooltip {
+				position: fixed;
+				left: 0;
+				top: 0;
+				transform: translate(12px, 18px);
+				background: rgba(9, 11, 18, 0.92);
+				color: #edf4ff;
+				border: 1px solid var(--line);
+				border-radius: 6px;
+				padding: 0.35rem 0.55rem;
+				font-size: 0.8rem;
+				letter-spacing: 0.02em;
+				pointer-events: none;
+				opacity: 0;
+				transition: opacity 0.12s ease;
+				z-index: 50;
+				white-space: nowrap;
+			}
+
+			.tooltip.visible {
+				opacity: 1;
+			}
+
+			video {
+				display: block;
+				width: 100%;
+				height: auto;
+				border-radius: 8px;
+				background: #000;
+			}
+
+			a {
+				color: #dfe9ff;
+				font-size: 1.1rem;
+				text-decoration: none;
+			}
+
+			a:hover {
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<h1>My Music</h1>
+			<h2>Choose a song!</h2>
+			<div class="button-row">
+				<button class="play-button" type="button" data-video="images/Clown Song (Round and Round) - Noonie.mp4" aria-label="Play Clown Song">
+					<img src="images/cs.jpg" alt="Clown Song" />
+				</button>
+				<button class="play-button" type="button" data-video="images/Hypnotic Fantasy - Music Video.mp4" aria-label="Play Hypnotic Fantasy">
+					<img src="images/hypf.png" alt="Hypnotic Fantasy" />
+				</button>
+				<button class="play-button" type="button" data-video="images/Your Real Friend (Unofficial music video) by Noonie.mp4" aria-label="Play Your Real Friend">
+					<img src="images/yrf.png" alt="Your Real Friend" />
+				</button>
+			</div>
+			<div class="video-wrap" id="video-wrap">
+				<div class="video-overlay" aria-hidden="true"></div>
+				<video id="clown-video" controls playsinline preload="metadata" style="position: relative; z-index: 1;">
+					<source src="images/Clown Song (Round and Round) - Noonie.mp4" type="video/mp4" />
+					Your browser does not support the video tag.
+				</video>
+			</div>
+			<a class="home-link" href="index.html">← Back to Home</a>
+		</main>
+		<div class="tooltip" id="song-tooltip" aria-hidden="true"></div>
+		<script>
+			const video = document.getElementById('clown-video');
+			const videoWrap = document.getElementById('video-wrap');
+			const buttons = document.querySelectorAll('.play-button');
+			const tooltip = document.getElementById('song-tooltip');
+
+			buttons.forEach((button) => {
+				const label = button.getAttribute('aria-label') || button.textContent.trim();
+				button.addEventListener('mouseenter', (event) => {
+					tooltip.textContent = label.replace('Play ', '');
+					tooltip.classList.add('visible');
+					tooltip.style.left = `${event.clientX}px`;
+					tooltip.style.top = `${event.clientY}px`;
+				});
+
+				button.addEventListener('mousemove', (event) => {
+					tooltip.style.left = `${event.clientX}px`;
+					tooltip.style.top = `${event.clientY}px`;
+				});
+
+				button.addEventListener('mouseleave', () => {
+					tooltip.classList.remove('visible');
+				});
+
+				button.addEventListener('click', () => {
+					const source = button.getAttribute('data-video');
+					const sourceElement = video.querySelector('source');
+					sourceElement.setAttribute('src', source);
+					video.load();
+					videoWrap.classList.add('is-playing');
+					video.play();
+				});
+			});
+
+			video.addEventListener('pause', () => {
+				if (video.currentTime === 0) {
+					videoWrap.classList.remove('is-playing');
+				}
+			});
+		</script>
+	</body>
 </html>
